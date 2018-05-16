@@ -26,5 +26,6 @@ MongoClient.connect(url)
         return db.dropCollection(collection)})
     .then((result) => {
         client.close();
-    });
+    })
+    .catch(err => console.log(err));
 });
