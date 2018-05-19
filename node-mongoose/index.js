@@ -9,9 +9,23 @@ mongoose.connect(url)
     var dish = new Dishes({name : "Rajma", description: "Good dish"});
     dish.save()
     .then((dish) => {
-        return Dishes.find({}).exec();
+        return Dishes.findByIdAndUpdate(dish._id, {
+            $set : {
+                description: "Very good dish"
+            }},{
+                new : true
+            }).exec()
     })
     .then((dish) => {
+        console.log(dish);
+        dish.comments.push({
+            rating : 1,
+            comment : "Amazing",
+            author : "Prateek"
+        });
+        return dish.save();
+    })
+    .then(dish => {
         console.log(dish);
         return mongoose.connection.dropCollection('dishes');
     })
