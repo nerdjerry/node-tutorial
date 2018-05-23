@@ -17,28 +17,39 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('12345-7839-81292'));
 
 function auth(req,res, next){
-  var authHeader = req.headers.authorization;
-  if(!authHeader) {
-    res.setHeader('Www-Authenticate', "Basic")
-    var err = new Error('You are not authenticated user');
-    err.status = 401;
-    next(err);
-    return;
-  }
+  if(!req.signedCookies.user){
+    var authHeader = req.headers.authorization;
+    if(!authHeader) {
+      res.setHeader('Www-Authenticate', "Basic")
+      var err = new Error('You are not authenticated user');
+      err.status = 401;
+      next(err);
+      return;
+    }
   
-  var auth = new Buffer(authHeader.split(" ")[1], 'base64').toString().split(":");;
-  var username = auth[0];
-  var password = auth[1];
-  if(username == "admin", password = "password"){
-    next();
+    var auth = new Buffer(authHeader.split(" ")[1], 'base64').toString().split(":");;
+    var username = auth[0];
+    var password = auth[1];
+    if(username == "admin", password = "password"){
+      res.cookie("user","admin",{signed : true});
+      next()
+    }else{
+      res.setHeader('Wwww-Authenticate', "Basic")
+      var err = new Error('You are not authenticated user');
+      err.status = 401;
+      next(err);
+    }
   }else{
-    res.setHeader('Wwww-Authenticate', "Basic")
-    var err = new Error('You are not authenticated user');
-    err.status = 401;
-    next(err);
+    if(req.signedCookies.user === "admin"){
+      next()
+    }else{
+      var err = new Error('You are not authenticated user');
+      err.status = 401;
+      next(err);
+    }
   }
 }
 
