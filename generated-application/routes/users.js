@@ -89,7 +89,6 @@ router.post('/login', (req, res, next) => {
 
 router.get('/logout', (req, res, next) => {
   if(req.session.user === "authenticated"){
-    console.log('Deleting session');
     req.session.destroy();
     res.clearCookie('session-id');
     res.redirect('/');
