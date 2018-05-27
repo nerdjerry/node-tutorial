@@ -12,10 +12,11 @@ var usersRouter = require('./routes/users');
 var dishRouter = require('./routes/dishRouter');
 var passport = require('passport');
 var authenticate = require('./authenticate');
+var config  = require('./config');
 
 var app = express();
 
-const url = "mongodb://localhost:27017/conFusion";
+const url = config.mongourl;
 
 mongoose.connect(url).then(() => {
   console.log("Connection to database successfull");
