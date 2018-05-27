@@ -31,14 +31,15 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: false
 }));
-app.use(cookieParser('12345-7839-81292'));
-app.use(session({
+//app.use(cookieParser('12345-7839-81292'));
+//Remove session support
+/*app.use(session({
   name: 'session-id',
   secret: '12345-32131-12121',
   saveUninitialized: false,
   resave: false,
   store: new FileStore()
-}));
+}));*/
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -46,18 +47,6 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-function auth(req, res, next) {
-  console.log(req.session);
-  if (!req.user) {
-    var err = new Error("You are not authenticated");
-    res.setHeader('Www-Authenticate', 'Basic');
-    res.stausCode = 401;
-    next(err);
-  } else {
-    next();
-  }
-}
-app.use(auth);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
