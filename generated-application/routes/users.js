@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var User = require('../models/userSchema');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var authenticate = require('../authenticate');
 
 router.use(bodyParser.json());
 /* GET users listing. */
@@ -33,12 +34,16 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/login', passport.authenticate('local'), (req, res, next) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json({
-      status: true,
-      status: 'Login Successfull'
-    });
+  var token = authenticate.getToken({
+    _id: req.user._id
+  });
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'application/json');
+  res.json({
+    status: true,
+    token: token,
+    message: 'Login Successfull'
+  });
 });
 
 router.get('/logout', (req, res, next) => {
