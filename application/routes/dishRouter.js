@@ -5,6 +5,8 @@ const dishRouter = expres.Router();
 
 dishRouter.use(bodyParser.json());
 
+//TODO : Add populate when you get dishes and comments
+//TODO : Add user id to comment when adding comment
 dishRouter.route('/')
     .all((req, res, next) => {
         res.statusCode = 200;
