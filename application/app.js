@@ -45,6 +45,14 @@ app.use(express.urlencoded({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Route all requests to HTTPS Server 
+app.use("*", (req,res,next) =>{
+  if(req.secure){
+    next()
+  }else{
+    res.redirect(307,"https://" + req.hostname + ":" + app.get('secPort') +req.url);
+  }
+})
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
