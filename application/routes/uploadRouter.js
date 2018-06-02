@@ -23,3 +23,26 @@ options.fileFilter = (req,file,cb) => {
 }
 
 var upload = multer(options)
+
+uploadRouter.use(bodyParser.json());
+
+uploadRouter.route('/')
+.get(authenticate.verifyUser,(req,res,next) => {
+    res.statusCode = 400;
+    res.end('This operation is not allowed');
+})
+.post(authenticate.verifyUser,upload.single('file'),(req,res,next) =>{
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(json);
+})
+.put(authenticate.verifyUser,(req,res,next) => {
+    res.statusCode = 400;
+    res.end('This operation is not allowed');
+})
+.delete(authenticate.verifyUser,(req,res,next) => {
+    res.statusCode = 400;
+    res.end('This operation is not allowed');
+});
+
+module.exports = uploadRouter;
