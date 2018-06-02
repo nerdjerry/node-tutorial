@@ -13,7 +13,7 @@ var dishRouter = require('./routes/dishRouter');
 var passport = require('passport');
 var authenticate = require('./authenticate');
 var config  = require('./config');
-
+var uploadRouter = require('./routes/uploadRouter');
 var app = express();
 
 const url = config.mongourl;
@@ -58,7 +58,7 @@ app.use('/users', usersRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.use('/fileupload', uploadRouter);
 app.use('/dishes', dishRouter);
 
 // catch 404 and forward to error handler
