@@ -34,7 +34,7 @@ uploadRouter.route('/')
 .post(authenticate.verifyUser,upload.single('file'),(req,res,next) =>{
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
-    res.json(json);
+    res.json(req.file);
 })
 .put(authenticate.verifyUser,(req,res,next) => {
     res.statusCode = 400;
