@@ -9,7 +9,7 @@ dishRouter.use(bodyParser.json());
 //TODO : Add populate when you get dishes and comments
 //TODO : Add user id to comment when adding comment
 dishRouter.route('/')
-    .options(cors.corsWithOptions, (req,res) => {res.sendStatus(200)})
+    .options(cors.corsWithOptions)
     .all((req, res, next) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain');
@@ -32,7 +32,7 @@ dishRouter.route('/')
     });
 
 dishRouter.route('/:dishId')
-    .options(cors.corsWithOptions, (req,res) => {res.sendStatus(200)})
+    .options(cors.corsWithOptions)
     .get((req, res, next) => {
         res.end("Sending you dish with id " + req.params.dishId);
     })

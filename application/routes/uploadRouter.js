@@ -28,7 +28,7 @@ var upload = multer(options)
 uploadRouter.use(bodyParser.json());
 
 uploadRouter.route('/')
-.options(cors.corsWithOptions, (req,res) => { res.sendStatus(200)})
+.options(cors.corsWithOptions)
 .get(cors.cors,authenticate.verifyUser,(req,res,next) => {
     res.statusCode = 400;
     res.end('This operation is not allowed');
