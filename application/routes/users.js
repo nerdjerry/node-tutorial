@@ -5,14 +5,15 @@ var User = require('../models/userSchema');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var authenticate = require('../authenticate');
+const cors = require('./cors');
 
 router.use(bodyParser.json());
 /* GET users listing. */
-router.get('/', function (req, res, next) {
+router.get('/', cors.corsWithOptions, function (req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/signup', (req, res, next) => {
+router.post('/signup', cors.corsWithOptions,(req, res, next) => {
   if (req.body.username) {
     User.register(new User({
       username: req.body.username
@@ -54,7 +55,7 @@ router.post('/signup', (req, res, next) => {
   }
 });
 
-router.post('/login', passport.authenticate('local'), (req, res, next) => {
+router.post('/login', cors.corsWithOptions,passport.authenticate('local'), (req, res, next) => {
   var token = authenticate.getToken({
     _id: req.user._id
   });
