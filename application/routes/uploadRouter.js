@@ -3,6 +3,7 @@ const uploadRouter = express.Router();
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const authenticate = require('../authenticate');
+const cors = require('./cors');
 
 const options = {}
 
@@ -27,20 +28,21 @@ var upload = multer(options)
 uploadRouter.use(bodyParser.json());
 
 uploadRouter.route('/')
-.get(authenticate.verifyUser,(req,res,next) => {
+.options(cors.corsWithOptions)
+.get(cors.cors,authenticate.verifyUser,(req,res,next) => {
     res.statusCode = 400;
     res.end('This operation is not allowed');
 })
-.post(authenticate.verifyUser,upload.single('file'),(req,res,next) =>{
+.post(cors.corsWithOptions,authenticate.verifyUser,upload.single('file'),(req,res,next) =>{
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(req.file);
 })
-.put(authenticate.verifyUser,(req,res,next) => {
+.put(cors.corsWithOptions,authenticate.verifyUser,(req,res,next) => {
     res.statusCode = 400;
     res.end('This operation is not allowed');
 })
-.delete(authenticate.verifyUser,(req,res,next) => {
+.delete(cors.corsWithOptions,authenticate.verifyUser,(req,res,next) => {
     res.statusCode = 400;
     res.end('This operation is not allowed');
 });
