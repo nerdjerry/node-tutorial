@@ -68,6 +68,19 @@ router.post('/login', cors.corsWithOptions,passport.authenticate('local'), (req,
   });
 });
 
+router.get('/facebook', passport.authenticate('passport-facebook-token'), (req,res,next) => {
+  var token = authenticate.getToken({
+    _id: req.user._id
+  });
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'application/json');
+  res.json({
+    status: true,
+    token: token,
+    message: 'Login Successfull'
+  });
+})
+
 router.get('/logout', (req, res, next) => {
   if (req.user) {
     req.session.destroy();
