@@ -68,7 +68,7 @@ router.post('/login', cors.corsWithOptions,passport.authenticate('local'), (req,
   });
 });
 
-router.get('/facebook', passport.authenticate('passport-facebook-token'), (req,res,next) => {
+router.get('/facebook', passport.authenticate('facebook-token'), (req,res,next) => {
   var token = authenticate.getToken({
     _id: req.user._id
   });
