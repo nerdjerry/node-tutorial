@@ -41,7 +41,7 @@ exports.verifyUser = passport.authenticate('jwt', {
 exports.facebookLogin = passport.use(new facebookStrategy({
     clientID : config.clientId,
     clientSecret : config.clientSecret
-}, (accessToken, refresToken, profile, done) => {
+}, (accessToken, refreshToken, profile, done) => {
     User.findOne({facebookId : profile.id})
     .then((user) => {
         if(user){
@@ -49,8 +49,8 @@ exports.facebookLogin = passport.use(new facebookStrategy({
         }else{
             user = new User({facebookId : profile.id});
             user.username = profile.displayName;
-            user.firstname = profile.givenName;
-            user.lastname = profile.familyName;
+            user.firstname = profile.name.givenName;
+            user.lastname = profile.name.familyName
             user.save()
             .then((user) => {
                 done(null, user);
