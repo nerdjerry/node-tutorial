@@ -1,3 +1,4 @@
 node_modules
 session
 .DS_Store
+application/public/images/
