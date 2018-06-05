@@ -34,5 +34,17 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "dishes": {
+    "dataSource": "db",
+    "public": true
+  },
+  "promotions": {
+    "dataSource": "db",
+    "public": true
+  },
+  "leaders": {
+    "dataSource": "db",
+    "public": true
   }
 }
