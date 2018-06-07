@@ -54,5 +54,9 @@
   "Comments": {
     "dataSource": "MongoDB",
     "public": true
+  },
+  "Favorites": {
+    "dataSource": "MongoDB",
+    "public": true
   }
 }
