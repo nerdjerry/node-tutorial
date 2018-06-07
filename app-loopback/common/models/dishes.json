@@ -43,6 +43,11 @@
       "type": "hasMany",
       "model": "Comments",
       "foreignKey": ""
+    },
+    "favorites": {
+      "type": "hasMany",
+      "model": "Favorites",
+      "foreignKey": ""
     }
   },
   "acls": [
