@@ -5,8 +5,8 @@
   "options": {
     "validateUpsert": true
   },
-  "mixins" : {
-    "TimeStamp" : true
+  "mixins": {
+    "TimeStamp": true
   },
   "properties": {
     "firstname": {
