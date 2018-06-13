@@ -76,4 +76,27 @@ router.get('/logout', (req, res, next) => {
     next(err);
   }
 });
+
+router.get('/checkJWT', (req,res,next) => {
+  passport.authenticate('jwt', {session : false}, (err, user, info) => {
+    if(err) {
+      return next(err);
+    }
+    if(!user) {
+      res.statusCode = 401;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({
+        status: false,
+        message: 'Token Invalid',
+        err: info
+      });
+    }
+    res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({
+        status: true,
+        message: 'Token Valid'
+      });
+  }) (req,res,next);
+})
 module.exports = router;
