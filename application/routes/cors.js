@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 
-const whitelist = ["http://localhost:3000","https://locahost:3443"];
+const whitelist = ["http://localhost:3000","https://locahost:3443","http://localhost:4200"];
 var corsOptionsDelegate = (req, callback) =>{
     var corsOptions;
     if(whitelist.indexOf(req.header('Origin')) !== -1){
