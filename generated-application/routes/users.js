@@ -33,17 +33,36 @@ router.post('/signup', (req, res, next) => {
   }
 });
 
-router.post('/login', passport.authenticate('local'), (req, res, next) => {
-  var token = authenticate.getToken({
-    _id: req.user._id
-  });
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json({
-    status: true,
-    token: token,
-    message: 'Login Successfull'
-  });
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      res.statusCode = 401;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({
+        status: false,
+        message: 'Login Unsuccessfull',
+        err: info
+      });
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      var token = authenticate.getToken({
+        _id: req.user._id
+      });
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({
+        status: true,
+        token: token,
+        message: 'Login Successfull'
+      });
+    })
+  })(req, res, next);
 });
 
 router.get('/logout', (req, res, next) => {
