@@ -1,0 +1,15 @@
+{
+  "name": "graphql-app",
+  "version": "1.0.0",
+  "description": "GraphQL application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index"
+  },
+  "author": "Prateek",
+  "license": "ISC",
+  "dependencies": {
+    "graphql-yoga": "^1.14.10"
+  }
+}
