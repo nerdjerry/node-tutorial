@@ -1,33 +1,39 @@
-const {GraphQLServer} = require('graphql-yoga');
+const { GraphQLServer } = require("graphql-yoga");
 
-const typeDefs = `
-type Query{
-    info: String!,
-    feed : [Link!]!,
-}
-type Link {
-    id: ID!,
-    description: String!,
-    url: String!
-}
-`;
-const list = [{
-    id : 3223,
-    description : "This is a link",
-    url : "google.com"
-}]
+const list = [
+  {
+    id: 0,
+    description: "This is a link",
+    url: "google.com"
+  }
+];
+let counter = list.length;
 const resolvers = {
-    Query : {
-        info : () => "This is test API",
-        feed : () => list,
-    },
-    //Optional
-    Link : {
-        id : (root) => root.id,
-        description : (root) => root.description,
-        url: (root) => root.url,
+  Query: {
+    info: () => "This is test API",
+    feed: () => list
+  },
+  //Optional
+  Link: {
+    id: root => root.id,
+    description: root => root.description,
+    url: root => root.url
+  },
+  Mutation: {
+    post: (root,args) => {
+        var link = {
+            id : counter++,
+            description : args.description,
+            url: args.url
+        };
+        list.push(link);
+        return link;
     }
+  }
 };
 
-const server = new GraphQLServer({typeDefs, resolvers});
+const server = new GraphQLServer({
+  typeDefs: "./src/schema.graphql",
+  resolvers
+});
 server.start(() => console.log("Server is running"));
