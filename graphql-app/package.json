@@ -10,7 +10,9 @@
   "author": "Prateek",
   "license": "ISC",
   "dependencies": {
+    "graphql-import": "^0.6.0",
     "graphql-yoga": "^1.14.10",
-    "prisma": "^1.6.3"
+    "prisma": "^1.10.2",
+    "prisma-binding": "^2.1.0"
   }
 }
