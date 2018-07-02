@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "graphql-import": "^0.6.0",
+    "graphql-subscriptions": "^0.5.8",
     "graphql-tools": "^3.0.4",
     "graphql-yoga": "^1.14.10",
     "prisma": "^1.10.2",
