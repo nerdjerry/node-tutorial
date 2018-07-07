@@ -10,10 +10,12 @@
   "author": "Prateek",
   "license": "ISC",
   "dependencies": {
+    "apollo-link-http": "^1.5.4",
     "graphql-import": "^0.6.0",
     "graphql-subscriptions": "^0.5.8",
     "graphql-tools": "^3.0.4",
-    "graphql-yoga": "^1.14.10",
+    "graphql-yoga": "^1.14.12",
+    "node-fetch": "^2.1.2",
     "prisma": "^1.10.2",
     "prisma-binding": "^2.1.0"
   }
