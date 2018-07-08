@@ -5,6 +5,7 @@ const fetch = require('node-fetch');
 const {makeRemoteExecutableSchema, delegateToSchema, makeExecutableSchema, introspectSchema}  = require('graphql-tools');
 const fs = require('fs');
 
+//Convinence class to create GitHub Link
 class GitHubLink extends HttpLink{
     constructor(token){
         if(!token){
