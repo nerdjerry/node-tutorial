@@ -1,0 +1,7 @@
+#import Organization from './github.graphql'
+#import Repository from './github.graphql'
+type Query{
+       graphcool : Organization!
+       graphalcoolRepositories(names: [String!]!): Repository!
+       info : String 
+}
