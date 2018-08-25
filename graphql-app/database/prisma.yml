@@ -10,4 +10,9 @@ datamodel: datamodel.graphql
 # You can only access the API when providing JWTs that are signed with this secret
 secret: mysecret123
 #cluster: public-yellowcentaur-956/prisma-us1
-endpoint: https://us1.prisma.sh/public-yellowcentaur-956/hackernews-node/dev
+endpoint: 'https://eu1.prisma.sh/public-graytracker-771/hackernews-node/dev'
+
+# Deploy hook
+hooks:
+  post-deploy:
+    - graphql get-schema --project database
